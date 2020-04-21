@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -6,8 +8,15 @@
     box-sizing: border-box;
 }
 
+body {
+    background-color: rgba(239, 213, 213, 0.4);
+    min-height: 100vh;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+}
+
 .container {
-    max-width: 1000px;
+    max-width: 600px;
     width: 100%;
     padding: 0 20px;
     margin: auto;
@@ -16,12 +25,36 @@
 .list {
     display: table;
     width: 100%;
+    background-color: #fff;
+    margin-top: 40px;
+    overflow: hidden;
+    border-radius: 10px;
+    -webkit-box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.13);
+    -moz-box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.13);
+    box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.13);
 }
 
 .row {
     display: table-row;
+    text-align: center;
+}
+
+.row:nth-child(odd) {
+    background-color: rgba(219, 236, 213, 0.57);
 }
 
 .row > span {
     display: table-cell;
+    padding: 5px 20px;
+}
+
+.row:first-child,
+.row:last-child {
+    background-color: rgba(255, 197, 197, 0.65);
+    font-weight: bold;
+    color: #b7909e;
+}
+
+.row:nth-child(n + 2) .text:last-child {
+    text-align: left;
 }
