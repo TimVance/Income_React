@@ -7,7 +7,15 @@ export default class extends React.Component {
     }
 
     loadData() {
-        fetch('https://income.dlay.ru/api/categoryes.php')
+        fetch('https://income.dlay.ru/api/categoryes.php', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
+            },
+            method: 'POST',
+            mode: 'no-cors',
+        })
             .then(response => response.json())
             .then(rows => (this.setState({ categoryes: rows.categoryes} )) );
     }
@@ -18,21 +26,28 @@ export default class extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        console.log(event.target);
+        let data = new FormData();
+        let form = {
+            date: event.target.date.value,
+            sum: event.target.sum.value,
+            comment: event.target.text.value,
+            cat: event.target.cat.value,
+        };
+        data.append("form", JSON.stringify(form));
+        console.log(data);
         fetch('https://income.dlay.ru/api/write.php', {
-            //headers: {'Content-Type':'application/json'},
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json; charset=UTF-8',
+                'Access-Control-Allow-Origin': '*'
+            },
             method: 'POST',
             mode: 'no-cors',
-            body: JSON.stringify({
-                date: event.target.date.value,
-                sum: event.target.sum.value,
-                comment: event.target.text.value,
-                cat: event.target.cat.value,
-            })
+            body: data
         })
         .then(response => response.json())
         .then(data => {
-            console.log('Data from response: ');
+            console.log(data);
         });
     }
 
@@ -40,9 +55,9 @@ export default class extends React.Component {
         return (
             <div>
                 <form method="post" onSubmit={this.handleSubmit}>
-                    <input type="date" name="date"/>
-                    <input type="input" placeholder="Sum" name="sum"/>
-                    <input type="input" placeholder="text" name="text"/>
+                    <input type="date" value={new Date().toISOString().split("T", 1)} required name="date"/>
+                    <input type="input" required placeholder="Sum" name="sum"/>
+                    <input type="input" required placeholder="text" name="text"/>
                     <select name="cat">
                         {this.state.categoryes.map(item => {
                             return (

@@ -9,7 +9,15 @@ export default class extends React.Component {
     };
 
     loadData() {
-        fetch('https://income.dlay.ru/api/rows.php')
+        fetch('https://income.dlay.ru/api/rows.php', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
+            },
+            method: 'POST',
+            mode: 'no-cors',
+        })
         .then(response => response.json())
         .then(rows => (this.setState({ rows: rows.items, sum: rows.sum, count: rows.count} )) );
     }

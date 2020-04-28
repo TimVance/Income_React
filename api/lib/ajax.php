@@ -2,14 +2,14 @@
 
     include_once("db.php");
 
-    function addItem() {
-        if (!empty($_POST)) {
+    function addItem($data) {
+        if (!empty($data)) {
 
-            $date = strtotime($_POST["date"]);
+            $date = strtotime($data['date']);
 
             $db    = DataBase::getDB();
             $query = "INSERT INTO `income` (`id`, `sum`, `comment`, `date`, `category`) VALUES (NULL, {?}, {?}, {?}, {?})";
-            $db->query($query, array($_POST["sum"], $_POST["comment"], $date, $_POST["cat"]));
+            return $db->query($query, array($data['sum'], $data['comment'], $date, $data['cat']));
         }
     }
 

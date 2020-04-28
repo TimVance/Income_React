@@ -1,15 +1,12 @@
 <?php
 
-header('Content-type: text/html');
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Credentials: true');
-//include_once "./lib/ajax.php";
+header('Content-Type: application/json');
+header("Access-Control-Allow-Origin", "*");
+header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
-//addItem();
+include_once "./lib/ajax.php";
+
+addItem(get_object_vars(json_decode($_POST["form"])));
 
 
-
-$res[] = $_REQUEST;
-$res[] = array("test", "test2");
-
-echo json_encode($res);
+echo json_encode('success');
