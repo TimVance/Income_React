@@ -7,7 +7,7 @@ export default class extends React.Component {
     }
 
     loadData() {
-        fetch('https://income.dlay.ru/api/categoryes.php', {
+        fetch('/api/categoryes.php', {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
@@ -24,7 +24,7 @@ export default class extends React.Component {
         this.loadData();
     }
 
-    handleSubmit(event) {
+    handleSubmit = (event) => {
         event.preventDefault();
         let data = new FormData();
         let form = {
@@ -34,8 +34,7 @@ export default class extends React.Component {
             cat: event.target.cat.value,
         };
         data.append("form", JSON.stringify(form));
-        console.log(data);
-        fetch('https://income.dlay.ru/api/write.php', {
+        fetch('/api/write.php', {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json; charset=UTF-8',
@@ -48,6 +47,7 @@ export default class extends React.Component {
         .then(response => response.json())
         .then(data => {
             console.log(data);
+            this.props.insert();
         });
     }
 

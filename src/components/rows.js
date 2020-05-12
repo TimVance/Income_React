@@ -9,7 +9,7 @@ export default class extends React.Component {
     };
 
     loadData() {
-        fetch('https://income.dlay.ru/api/rows.php', {
+        fetch('/api/rows.php', {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
