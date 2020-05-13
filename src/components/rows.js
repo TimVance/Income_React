@@ -2,13 +2,25 @@ import React from 'react';
 
 export default class extends React.Component {
 
+    constructor(props) {
+        super(props);
+        console.log(props);
+    }
+
     state = {
         rows: [],
         sum: 0,
         count: 0,
     };
 
+    componentWillReceiveProps(nextProps) {
+        console.log(nextProps);
+        console.log("rows");
+        this.loadData();
+    }
+
     loadData() {
+        console.log('ewe');
         fetch('/api/rows.php', {
             headers: {
                 'Accept': 'application/json',
@@ -24,6 +36,7 @@ export default class extends React.Component {
 
     componentDidMount() {
         this.loadData();
+        console.log("rows2");
     }
 
     render() {
