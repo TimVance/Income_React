@@ -4,7 +4,6 @@ export default class extends React.Component {
 
     constructor(props) {
         super(props);
-        console.log(props);
     }
 
     state = {
@@ -14,13 +13,10 @@ export default class extends React.Component {
     };
 
     componentWillReceiveProps(nextProps) {
-        console.log(nextProps);
-        console.log("rows");
         this.loadData();
     }
 
     loadData() {
-        console.log('ewe');
         fetch('/api/rows.php', {
             headers: {
                 'Accept': 'application/json',
@@ -36,7 +32,31 @@ export default class extends React.Component {
 
     componentDidMount() {
         this.loadData();
-        console.log("rows2");
+    }
+
+    delete = (id) => {
+        const conf = window.confirm("Delete item №" + id + "?");
+        if (conf) {
+            let data = new FormData();
+            let form = {
+                id: id
+            };
+            data.append("form", JSON.stringify(form));
+            fetch('/api/delete.php', {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json; charset=UTF-8',
+                    'Access-Control-Allow-Origin': '*'
+                },
+                method: 'POST',
+                mode: 'no-cors',
+                body: data
+            })
+                .then(response => response.json())
+                .then(data => {
+                    this.loadData();
+                });
+        }
     }
 
     render() {
@@ -46,6 +66,7 @@ export default class extends React.Component {
                     <span className="number">Date</span>
                     <span className="sum">Sum</span>
                     <span className="text">Text</span>
+                    <span className="text"></span>
                 </div>
                 {this.state.rows.map(item => {
                     return (
@@ -53,6 +74,12 @@ export default class extends React.Component {
                            <span className="number">{item.date}</span>
                            <span className="sum">{item.sum}</span>
                            <span className="text" title={item.category}>{item.comment}</span>
+                           <span className="actions">
+                               <i className="del"
+                                  onClick={(e) =>
+                                  this.delete(item.id, e)}>
+                               </i>
+                           </span>
                        </div>
                     );
                 })}
@@ -60,6 +87,7 @@ export default class extends React.Component {
                     <span className="number"></span>
                     <span className="sum">{this.state.count} items</span>
                     <span className="text">{this.state.sum} rub</span>
+                    <span className="text"></span>
                 </div>
             </div>
         );

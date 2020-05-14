@@ -9,10 +9,7 @@ export default class extends React.Component {
     }
 
     insert = () => {
-        console.log(this.state.changeForm);
-        console.log("insert");
         this.setState({ changeForm: true });
-        console.log(this.state.changeForm);
     }
 
     render() {

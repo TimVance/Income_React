@@ -46,7 +46,6 @@ export default class extends React.Component {
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data);
             this.props.insert();
         });
     }

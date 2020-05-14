@@ -33,6 +33,13 @@
         return $db->select($query, array($first_day, $last_day));
     }
 
+    function delete($data) {
+        $db = DataBase::getDB();
+        $id = intval($data["id"]);
+        $query = "DELETE FROM `income` WHERE id={?}";
+        return $db->query($query, array($id));
+    }
+
     function selectCategoryes() {
         $db = DataBase::getDB();
         $query = "SELECT * FROM `category` WHERE {?}";

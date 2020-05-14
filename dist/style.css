@@ -58,3 +58,10 @@ body {
 .row:nth-child(n + 2) .text:last-child {
     text-align: left;
 }
+
+.del {
+    display: inline-block;
+    width: 60px;
+    height: 15px;
+    cursor: pointer;
+}
