@@ -7,7 +7,9 @@ export default class extends React.Component {
 
     state = {
         changeForm: false,
-        currentDate: ''
+        currentDate: '',
+        currentYear: 2020,
+        currentMonth: 5,
     }
 
     insert = () => {
@@ -17,9 +19,17 @@ export default class extends React.Component {
     render() {
         return (
             <div className="container">
-                <Date  currentDate={this.state.currentDate} />
-                <Rows changeForm={this.state.changeForm} />
-                <Form insert={this.insert} />
+                <Date
+                    currentDate={this.state.currentDate}
+                    currentMonth={this.state.currentMonth}
+                    currentYear={this.state.currentYear}
+                />
+                <Rows
+                    changeForm={this.state.changeForm}
+                />
+                <Form
+                    insert={this.insert}
+                />
             </div>
         );
     }

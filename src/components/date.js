@@ -4,36 +4,91 @@ export default class extends React.Component {
 
     constructor(props) {
         super(props);
+        console.log(props);
     }
 
     state = {
-        months: this.getMonths()
+        months: this.getMonths(),
+        firstYear: 2019
     };
 
 
     getMonths() {
         return [
-            [{1: "January"}],
-            [{2: "February"}],
-            [{3: "March"}],
-            [{4: "April"}],
-            [{5: "May"}],
-            [{6: "June"}],
-            [{7: "July"}],
-            [{8: "August"}],
-            [{9: "September"}],
-            [{10: "October"}],
-            [{11: "November"}],
-            [{12: "December"}]
+            {
+                id: 1,
+                name: "January"
+            },
+            {
+                id: 2,
+                name: "February"
+            },
+            {
+                id: 3,
+                name: "March"
+            },
+            {
+                id: 4,
+                name: "April"
+            },
+            {
+                id: 5,
+                name: "May"
+            },
+            {
+                id: 6,
+                name: "June"
+            },
+            {
+                id: 7,
+                name: "July"
+            },
+            {
+                id: 8,
+                name: "August"
+            },
+            {
+                id: 9,
+                name: "September"
+            },
+            {
+                id: 10,
+                name: "October"
+            },
+            {
+                id: 11,
+                name: "November"
+            },
+            {
+                id: 12,
+                name: "December"
+            }
         ]
     }
 
+    getYears() {
+        let years = [];
+        for (let i = this.state.firstYear; i <= parseInt(new Date().getFullYear()); i++) {
+            years.push(<option value={i} key={i}>{i}</option>);
+        }
+        return (
+            <select value={this.props.currentYear}>
+                {years}
+            </select>
+        );
+    }
+
     selectOptionMonths() {
-        const months = this.state.months.map((month, index) =>
-            <option key={index} value={index}>{month}</option>
+        const months = this.state.months.map((month) =>
+            <option
+                key={month.id}
+                value={month.id}
+            >
+                {month.name}
+            </option>
         );
         return (
-            <select>
+            <select value={this.props.currentMonth}>
                 {months}
             </select>
         );
@@ -44,7 +99,7 @@ export default class extends React.Component {
             <div>
                 <form method="post" onSubmit={this.handleSubmit}>
                     {this.selectOptionMonths()}
-                    <input type="submit" value="Get"/>
+                    {this.getYears()}
                 </form>
             </div>
         )
