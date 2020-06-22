@@ -8,7 +8,7 @@ export default class extends React.Component {
     state = {
         changeForm: false,
         currentDate: '',
-        currentYear: 2020,
+        currentYear: Date().getFullYear,
         currentMonth: 5,
     }
 
